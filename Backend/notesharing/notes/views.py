@@ -2,6 +2,7 @@ from rest_framework import permissions, generics
 from .models import Note
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.permissions import IsAuthenticated
+from users.models import User
 from .serializers import NoteSerializer
 
 class NoteListCreateView(generics.ListCreateAPIView):
