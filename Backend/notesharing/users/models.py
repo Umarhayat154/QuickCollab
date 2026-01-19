@@ -9,7 +9,7 @@ class UserManger(BaseUserManager):
         email = self.normalize_email(email)
         user = self.model(email=email, name=name, role=role)
         user.set_password(password)
-        user.is_active(True)
+        user.is_active=True
         user.save(using=self._db)
         return user
 
@@ -30,12 +30,12 @@ class User(AbstractBaseUser, PermissionsMixin):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255, blank=True, null=True)
     email = models.EmailField(unique=True)
-    roles = models.CharField(choices=Roles, null=True, blank=True)
+    role = models.CharField(choices=Roles, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(False)
+    is_staff = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
